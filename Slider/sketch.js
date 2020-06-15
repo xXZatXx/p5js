@@ -18,23 +18,22 @@ function setup() {
 	spot = new spot(random(width / 2 - 150 + 25 + 20, width / 2 - 150 + 25 + 250), 225);
 	spots.push(spot);
 
+  
 	btn = createButton('Save');
 	btn.mousePressed(pressy);
-	btn.position(width - 50, 2);
+	btn.position(width - 75, 2);
 
-  if(document.cookie != ''){
-    console.log('loadigg cookies')
-    maxScore = loadCookie('maxScore');
-    fullScore = loadCookie('fullScore');
-    bestScores = loadCookie('bestScores');
-    maxScore = int(maxScore);
-    fullScore = int(fullScore);
-    bestScores = int(bestScores);
-  } else {
-    maxScore = 10;
-    fullScore = 0;
-    bestScores = 0;
-  }
+  btn2 = createButton('Load');
+  btn2.mousePressed(pressy2);
+  btn2.position(width - 75, 32);
+
+  btn3 = createButton('Restart');
+  btn3.mousePressed(pressy3);
+  btn3.position(width - 75, 62);
+
+  maxScore = 10;
+  fullScore = 0;
+  bestScores = 0;
 }
 
 function draw() {
@@ -136,10 +135,40 @@ window.onbeforeunload = function() {
 
 //saving
 setInterval(function() {
-	saveCookies([ maxScore, fullScore, bestScores ], [ 'maxScore', 'fullScore', 'bestScores' ], 30);
+  saveVar(maxScore, 'maxScore')
+  saveVar(fullScore, 'fullScore')
+  saveVar(bestScores, 'bestScores')
+
+  for(let i = 0; i < 10; i++){
+    fill(255)
+    text('saving', width - 50, height)
+  }
 }, 30 * 1000);
 
 //save btn
 function pressy() {
-	saveCookies([ maxScore, fullScore, bestScores ], [ 'maxScore', 'fullScore', 'bestScores' ], 30);
+	saveVar(maxScore, 'maxScore')
+  saveVar(fullScore, 'fullScore')
+  saveVar(bestScores, 'bestScores')
+
+  for(let i = 0; i < 10; i++){
+    fill(255)
+    text('saving', width - 50, height)
+  }
+}
+
+function pressy2() {
+  yeete = loadVar('maxScore')
+  if(yeete != 'NaN' && yeete != null){
+    maxScore = int(loadVar('maxScore'))
+    fullScore = int(loadVar('fullScore'))
+    bestScores = int(loadVar('bestScores'))
+  }
+}
+
+function pressy3() {
+  localStorage.clear()
+  maxScore = 10;
+  fullScore = 0;
+  bestScores = 0;
 }

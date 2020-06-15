@@ -1,4 +1,4 @@
-function createCookie(cname, cvalue, exdays) {
+/*function createCookie(cname, cvalue, exdays) {
 	var d = new Date();
 	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
 	var expires = 'expires=' + d.toUTCString();
@@ -58,4 +58,13 @@ function loadCookie(cname) {
 		}
 	}
 	return cookie;
+}
+*/
+
+function saveVar(variable, variableName) {
+    localStorage.setItem(variableName, JSON.stringify(variable));
+}
+
+function loadVar(variableName) {
+    return JSON.parse(localStorage.getItem(variableName));
 }
